@@ -15,30 +15,28 @@ import app from 'flarum/app';
 export default function () {
   const post = this.attrs.post;
 
-  const mappings = JSON.parse('{ "https://cdn.jsdelivr.net":"https://testingcf.jsdelivr.net" }');
+  const mappings = {
+    "https://cdn.jsdelivr.net": "https://testingcf.jsdelivr.net"
+  }
+
   if (mappings === {}) return;
   if (Object.keys(mappings).length === 0) return;
-  // filtro per evitare il parsing doppio delle parole
-  // Object.keys(mappings).filter((w) => {
-  //   // let regex = new RegExp('\\b(' + w + ')\\b(?![^<]*>|[^<>]*</[^p])', 'gi');
-  //   let regex = /<img(?:(?!\/>).|\n)*?\/>/gm;
-  //   this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(regex, (match) => {
-  //     let tooltip = mappings[match.toLowerCase()];
-  //     if (tooltip) {
-  //       console.log('dddddd');
-  //       return '11111'
-  //       return `<span class="definition" data-tooltip="${tooltip}">${match}</span>`;
-  //     } else {
-  //       console.log('eeeeee');
-  //       return '22222'
-  //       return match;
-  //     }
-  //   });
-  // });
 
-  this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
-    console.log(capture);
-    return '22222'
+  Object.keys(mappings).filter((w) => {
+    let regex = /<img [^>]*src=['"]([^'"]+)[^>]*>/gi;
+    this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(regex, (match, capture) => {
+      let fixKey = mappings[match.toLowerCase()];
+      if (fixKey) {
+        return fixKey;
+      } else {
+        return match;
+      }
+    });
   });
+
+  // this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
+  //   console.log(capture);
+  //   return '22222'
+  // });
   
 }
