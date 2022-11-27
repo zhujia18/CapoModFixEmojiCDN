@@ -38,9 +38,12 @@ export default function () {
     console.log(match);
     console.log(capture);
     let fixKey = mappings[match.toLowerCase()];
+    console.log(fixKey);
       if (fixKey) {
+        console.log(111);
         return fixKey;
       } else {
+        console.log(222);
         return fixKey;
       }
   });
