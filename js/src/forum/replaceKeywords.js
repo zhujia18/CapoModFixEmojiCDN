@@ -37,7 +37,7 @@ export default function () {
   this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
     // console.log(match);
     // console.log(capture);
-    var domain = linkUrl.split('/');
+    var domain = capture.split('/');
     if (domain[2]) {
         domain = domain[2];
         let fixKey = mappings[domain.toLowerCase()];
