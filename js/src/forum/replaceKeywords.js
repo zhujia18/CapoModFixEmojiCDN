@@ -16,7 +16,7 @@ export default function () {
   const post = this.attrs.post;
 
   const mappings = {
-    "https://cdn.jsdelivr.net": "https://testingcf.jsdelivr.net"
+    "cdn.jsdelivr.net": "testingcf.jsdelivr.net"
   }
 
   if (mappings === {}) return;
@@ -35,17 +35,24 @@ export default function () {
   // });
 
   this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
-    console.log(match);
-    console.log(capture);
-    let fixKey = mappings[match.toLowerCase()];
-    console.log(fixKey);
-      if (fixKey) {
-        console.log(111);
-        return fixKey;
-      } else {
-        console.log(222);
-        return fixKey;
-      }
+    // console.log(match);
+    // console.log(capture);
+    var domain = linkUrl.split('/');
+    if (domain[2]) {
+        domain = domain[2];
+        let fixKey = mappings[domain.toLowerCase()];
+        console.log(fixKey);
+          if (fixKey) {
+        let fixKey = mappings[domain.toLowerCase()];
+            let newUrl = match.replace(domain,fixKey)
+            return newUrl;
+          } else {
+            return match
+          }
+
+    }else{
+        return match
+    }
   });
   
 }
