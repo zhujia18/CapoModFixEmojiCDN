@@ -20,8 +20,8 @@ export default function () {
   if (Object.keys(mappings).length === 0) return;
   // filtro per evitare il parsing doppio delle parole
   Object.keys(mappings).filter((w) => {
-    let regex = new RegExp('\\b(' + w + ')\\b(?![^<]*>|[^<>]*</[^p])', 'gi');
-    console.log('zzzzzzz');
+    // let regex = new RegExp('\\b(' + w + ')\\b(?![^<]*>|[^<>]*</[^p])', 'gi');
+    let regex = /<img(?:(?!\/>).|\n)*?\/>/gm;
     this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(regex, (match) => {
       let tooltip = mappings[match.toLowerCase()];
       if (tooltip) {
