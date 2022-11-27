@@ -22,21 +22,28 @@ export default function () {
   if (mappings === {}) return;
   if (Object.keys(mappings).length === 0) return;
 
-  Object.keys(mappings).filter((w) => {
-    let regex = /<img [^>]*src=['"]([^'"]+)[^>]*>/gi;
-    this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(regex, (match, capture) => {
-      let fixKey = mappings[match.toLowerCase()];
+  // Object.keys(mappings).filter((w) => {
+  //   let regex = /<img [^>]*src=['"]([^'"]+)[^>]*>/gi;
+  //   this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(regex, (match, capture) => {
+  //     let fixKey = mappings[match.toLowerCase()];
+  //     if (fixKey) {
+  //       return fixKey;
+  //     } else {
+  //       return match;
+  //     }
+  //   });
+  // });
+
+  this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
+    console.log(match);
+    console.log(capture);
+    // return '22222'
+    let fixKey = mappings[match.toLowerCase()];
       if (fixKey) {
         return fixKey;
       } else {
         return match;
       }
-    });
   });
-
-  // this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
-  //   console.log(capture);
-  //   return '22222'
-  // });
   
 }
