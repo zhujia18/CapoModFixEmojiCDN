@@ -15,6 +15,5 @@ import CommentPost from 'flarum/forum/components/CommentPost';
 import replaceKeywords from './replaceKeywords';
 
 app.initializers.add('justoverclock/flarum-ext-keywords', () => {
-  console.log("CapoMod FixCDN is working!")
   extend(CommentPost.prototype, 'oninit', replaceKeywords);  
 });

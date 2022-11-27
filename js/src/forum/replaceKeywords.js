@@ -16,15 +16,12 @@ export default function () {
   const post = this.attrs.post;
 
   const mappings = JSON.parse('{ "https://cdn.jsdelivr.net":"https://testingcf.jsdelivr.net" }');
-  console.log('aaaaa');
   if (mappings === {}) return;
-  console.log('bbbbbb');
   if (Object.keys(mappings).length === 0) return;
-  console.log('cccccc');
   // filtro per evitare il parsing doppio delle parole
   Object.keys(mappings).filter((w) => {
     let regex = new RegExp('\\b(' + w + ')\\b(?![^<]*>|[^<>]*</[^p])', 'gi');
-
+    console.log('zzzzzzz');
     this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(regex, (match) => {
       let tooltip = mappings[match.toLowerCase()];
       if (tooltip) {
