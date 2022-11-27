@@ -1,6 +1,6 @@
 <?php
 
-namespace CapoMod\FixEmojiCDN;
+namespace FoF\SecureHttps;
 
 use Flarum\Extend;
 
