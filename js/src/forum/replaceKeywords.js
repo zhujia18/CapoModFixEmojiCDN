@@ -37,12 +37,11 @@ export default function () {
   this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
     console.log(match);
     console.log(capture);
-    // return '22222'
     let fixKey = mappings[match.toLowerCase()];
       if (fixKey) {
         return fixKey;
       } else {
-        return match;
+        return fixKey;
       }
   });
   
