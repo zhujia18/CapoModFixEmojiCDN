@@ -37,7 +37,8 @@ export default function () {
   // });
 
   this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
-    console.log('capture');
+    console.log(capture);
+    return '22222'
   });
   
 }
