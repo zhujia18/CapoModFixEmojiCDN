@@ -27,8 +27,10 @@ export default function () {
     this.attrs.post.data.attributes.contentHtml = post.contentHtml().replace(regex, (match) => {
       let tooltip = mappings[match.toLowerCase()];
       if (tooltip) {
+        return '11111'
         return `<span class="definition" data-tooltip="${tooltip}">${match}</span>`;
       } else {
+        return '22222'
         return match;
       }
     });
